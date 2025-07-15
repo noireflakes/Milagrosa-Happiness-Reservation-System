@@ -1,0 +1,148 @@
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.dashboard-title {
+    font-family: 'Jomolhari', serif;
+    color: #2a8bac;
+    font-size: 2rem;
+}
+
+.logout-btn {
+    background-color: #e53e3e;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c53030;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.booking-table th {
+    background-color: #37B0D7;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+}
+
+.booking-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.booking-table tr:hover {
+    background-color: rgba(55, 176, 215, 0.05);
+}
+
+.status-badge {
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background-color: #f6e05e;
+    color: #975a16;
+}
+
+.status-approved {
+    background-color: #68d391;
+    color: #1a365d;
+}
+
+.status-denied {
+    background-color: #fc8181;
+    color: #9b2c2c;
+}
+
+.status-complete {
+    background-color: #4299e1;
+    color: white;
+}
+
+.btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.btn-danger {
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c53030;
+}
+
+.no-bookings {
+    text-align: center;
+    padding: 3rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.no-bookings i {
+    font-size: 3rem;
+    color: #a0aec0;
+    margin-bottom: 1rem;
+}
+
+.no-bookings h3 {
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.no-bookings p {
+    color: #718096;
+    margin-bottom: 1.5rem;
+}
+
+.new-booking-btn {
+    background-color: #37B0D7;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.new-booking-btn:hover {
+    background-color: #2a8bac;
+    color: white;
+}

@@ -1,0 +1,136 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+
+{% block title  %} <title>Contact</title> {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/contact.css'  %}?v{{ timestamp }}">
+
+<link rel="stylesheet" href="{% static 'css/navbar.css'  %}?v={{ timestamp }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Jomolhari&family=Playfair+Display:wght@400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+        </div>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li><a href="{% url 'amenities' %}" class="nav-link active">Amenities</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+            <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="contact-section">
+    <div class="section-header">
+        <p class="section-subtitle">Get In Touch</p>
+        <h1 class="section-title">Contact Us</h1>
+        <p class="section-description">Have questions or need assistance? Our team is here to help you with any inquiries about your stay at Milagrosa Happiness Private Resort.</p>
+    </div>
+    
+    <div class="contact-container">
+        <div class="contact-image">
+            <img src="{% static 'asset/image/contact_img.jpg' %}" alt="Milagrosa Happiness Resort">
+        </div>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>Resort Location</h4>
+                        <p>Peñabatan, Pulilan, Bulacan</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>Phone Number</h4>
+                        <p><a href="tel:+6399238728279">+63 9923 872 8279</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>Email Address</h4>
+                        <p><a href="mailto:milagrosahappinessresort@gmail.com">milagrosahappinessresort@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>Facebook Page</h4>
+                        <p><a href="https://www.facebook.com/MilagrosaHappinessResortt" target="_blank">Omie Santos</a></p>
+                    </div>
+                </div>
+                
+
+            </div>
+            
+
+        </div>
+    </div>
+    
+
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Penabatan, Pulilan, Bulacan</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@milagrosaresort.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'policies' %}">Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/MilagrosaHappinessResortt"><i class="fab fa-facebook"></i></a>
+   
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Milagrosa Happiness Private Resort. All Rights Reserved.</p>
+    </div>
+</footer>
+
+{% endblock %}

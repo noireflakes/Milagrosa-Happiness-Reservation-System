@@ -1,0 +1,41 @@
+{% extends "login/layout.html" %}
+
+{% load static %}
+{% block title %} <title>Verification</title> {% endblock %}
+{% block css %} <link rel="stylesheet" href="{% static 'css/otp.css' %}?v={{ timestamp }}"> {% endblock %}
+
+{% block body %}
+
+
+
+<div>{{ otp }}</div>
+<form action="{% url 'otp' %}" method="post">
+    {% csrf_token %}
+    <h2>Enter OTP</h2>
+    <input id="otp" name="otp" type="text" required placeholder="Enter OTP" maxlength="6">
+    <input type="submit" value="Submit">
+    <div id="timer" class="timer"></div>
+</form>
+
+
+<div><a id="otp_send_button" class="otp-send-link" style="display: none;" href="{% url 'otp' %}">Send OTP again?</a></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const timerElement = document.getElementById("timer");
+        const otpSendButton = document.getElementById("otp_send_button");
+        let timeLeft = 30;
+
+        const counter = setInterval(function() {
+            if (timeLeft > 0) {
+                timerElement.textContent = `Time left: ${timeLeft}s`;
+                timeLeft--;
+            } else {
+                clearInterval(counter);
+                otpSendButton.style.display = "block"; 
+            }
+        }, 1000);
+    });
+</script>
+
+{% endblock %}

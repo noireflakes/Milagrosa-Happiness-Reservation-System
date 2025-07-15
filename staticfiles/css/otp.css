@@ -1,0 +1,93 @@
+/* Basic reset and font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: #f0f4f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+  
+  /* OTP Form Styling */
+  form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: border 0.3s ease;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #357ABD;
+  }
+  
+  /* Timer Display */
+  .timer {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Send OTP Again Link */
+  .otp-send-link {
+    margin-top: 1rem;
+    display: block;
+    font-size: 0.9rem;
+    color: #4a90e2;
+    text-decoration: none;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+  
+  .otp-send-link:hover {
+    color: #357ABD;
+  }
+  
+  /* Debug info (otp, key, session, etc.) */
+  div:not(#timer):not(.otp-send-link):not(form):not(#otp_send_button) {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  

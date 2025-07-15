@@ -1,0 +1,184 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+{% block title %} <title>Amenities</title> {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="{% static 'css/amenities.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+        </div>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li><a href="{% url 'amenities' %}" class="nav-link active">Amenities</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+            <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero-banner">
+    <div class="hero-overlay">
+        <h1>Our Luxurious Amenities</h1>
+        <p>Experience unparalleled comfort and relaxation at Milagrosa Happiness Private Resort</p>
+    </div>
+    <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort View" class="hero-image">
+</section>
+
+<main class="amenities-container">
+    <section class="intro-section">
+        <h2 class="section-title">Your Comfort is Our Priority</h2>
+        <p class="section-description">Milagrosa Happiness Private Resort offers well-appointed rooms, a spacious event venue, stunning scenic views, and refreshing swimming pools - providing the perfect blend of comfort and relaxation for your perfect getaway.</p>
+    </section>
+
+    <section class="amenity-section">
+        <div class="section-header">
+            <i class="fas fa-umbrella-beach section-icon"></i>
+            <h2>Resort Amenities</h2>
+        </div>
+        
+        <div class="amenity-grid">
+            <div class="amenity-gallery">
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/slider3.jpg' %}" alt="Resort Pool">
+                    <div class="img-caption">Infinity Pool</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/amenities_img2.jpg' %}" alt="Resort Garden">
+                    <div class="img-caption">Lush Gardens</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort View">
+                    <div class="img-caption">Scenic Views</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/image3.jpg' %}" alt="Resort Pavilion">
+                    <div class="img-caption">Event Pavilion</div>
+                </div>
+            </div>
+            
+            <div class="amenity-features">
+                <ul class="features-list">
+                    <li><i class="fas fa-swimming-pool"></i> Private pool and jacuzzi</li>
+                    <li><i class="fas fa-utensils"></i> Fully equipped kitchen with grill</li>
+                    <li><i class="fas fa-music"></i> Videoke entertainment system</li>
+                    <li><i class="fas fa-parking"></i> Ample parking space</li>
+                    <li><i class="fas fa-tree"></i> Traditional kubo cottages</li>
+                    <li><i class="fas fa-umbrella"></i> Garden tables with umbrellas</li>
+                    <li><i class="fas fa-chair"></i> Elegant event furniture</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="amenity-section">
+        <div class="section-header">
+            <i class="fas fa-bed section-icon"></i>
+            <h2>Room Amenities</h2>
+        </div>
+        
+        <div class="amenity-grid reverse">
+            <div class="amenity-gallery">
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/amenities_img5.jpg' %}" alt="Resort Room">
+                    <div class="img-caption">Luxury Suite</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/amenities_img4.jpg' %}" alt="Room Bathroom">
+                    <div class="img-caption">Spa Bathroom</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/amenities_img3.jpg' %}" alt="Room View">
+                    <div class="img-caption">Panoramic Views</div>
+                </div>
+            </div>
+            
+            <div class="amenity-features">
+                <ul class="features-list">
+                    <li><i class="fas fa-snowflake"></i> Fully air-conditioned rooms</li>
+                    <li><i class="fas fa-tv"></i> Flat-screen cable TV</li>
+                    <li><i class="fas fa-wine-glass-alt"></i> Mini refrigerator</li>
+                    <li><i class="fas fa-bed"></i> Queen-size premium beds</li>
+                    <li><i class="fas fa-bath"></i> Ensuite bathrooms</li>
+                    <li><i class="fas fa-shower"></i> Hot & cold shower</li>
+                    <li><i class="fas fa-wifi"></i> High-speed WiFi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="amenity-section">
+        <div class="section-header">
+            <i class="fas fa-glass-cheers section-icon"></i>
+            <h2>Event Facilities</h2>
+        </div>
+        
+        <div class="amenity-grid">
+            <div class="amenity-gallery">
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/event1.jpg' %}" alt="Dining Area">
+                    <div class="img-caption">Elegant Dining</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'asset/image/image4.jpg' %}" alt="Dining Area">
+                    <div class="img-caption">Celebration Area</div>
+                </div>
+            </div>
+            
+            <div class="amenity-features">
+                <ul class="features-list">
+                    <li><i class="fas fa-expand"></i> Spacious event venue</li>
+                    <li><i class="fas fa-lightbulb"></i> Ambient lighting options</li>
+                    <li><i class="fas fa-chair"></i> Elegant tables and chairs</li>
+                    <li><i class="fas fa-restroom"></i> Clean restroom facilities</li>
+                    <li><i class="fas fa-utensils"></i> Catering preparation area</li>
+                </ul>
+                <a href="{% url 'contact' %}" class="cta-button">Inquire About Events <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Penabatan, Pulilan, Bulacan</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@milagrosaresort.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'policies' %}">Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/MilagrosaHappinessResortt"><i class="fab fa-facebook"></i></a>
+   
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Milagrosa Happiness Private Resort. All Rights Reserved.</p>
+    </div>
+</footer>
+
+{% endblock %}

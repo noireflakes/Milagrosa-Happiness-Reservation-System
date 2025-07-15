@@ -1,0 +1,328 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+{% block title  %} <title>Check in - Milagrosa Happiness Private Resort</title> {% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/book.css' %}?v={{ timestamp }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Jomolhari&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'calendar_library/index.global.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="{% url 'index' %}">Milagrosa Happiness Private Resort</a></li>
+    </ul>
+  </nav>
+  
+  <div class="hero-section">
+    <img src="{% static 'asset/image/book-img1.jpg' %}" alt="Resort View" class="hero-image">
+    <div class="hero-overlay">
+      <h1>Book Your Perfect Getaway</h1>
+      <p>Experience luxury and relaxation at Milagrosa Happiness Private Resort</p>
+    </div>
+  </div>
+
+  <div class="booking-container" style="display: flex; gap: 20px;">
+    <!-- LEFT: Booking Details -->
+    <div class="booking-form-container" style="flex: 1;">
+                 <form method="post" action="{% url 'check_in' %}" class="booking-form">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="book_type">Booking Type</label>
+              <select id="book_type" name="book_type" class="form-control" required>
+          
+               
+                <option value="Day Tour">Day Tour</option>
+                <option value="Night Tour">Night Tour</option>
+                <option value="22 Hours">22 Hours</option>
+                <option value="Full book">Custom</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="start_date">Check-in Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="end_date">Check-out Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="payment_method">Payment Method</label>
+              <select id="payment_method" name="payment_method" class="form-control" required>
+                <option value="">Select payment method</option>
+                <option value="gcash">Gcash</option>
+    
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="payment_type">Payment Type</label>
+              <select id="payment_type" name="payment_type" class="form-control" required>
+                <option value="">Select payment type</option>
+                <option value="Down payment">Down Payment</option>
+                <option value="Full payment">Full Payment</option>
+              </select>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            </div>
+          </form>
+    </div>
+  
+    <!-- RIGHT: Calendar + Summary stacked -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+    
+      <div class="calendar-container">
+        <h2>Check Resort Availability</h2>
+        <div id="calendar"></div>
+      </div>
+  
+    
+
+      
+    </div>
+ 
+
+ 
+  
+
+  
+  <div class="booking-container">
+    <div class="summary-container">
+      <h3>Booking Summary</h3>
+            <h3 class="summary-title">Booking Summary</h3>
+        <div class="summary-item">
+          <span class="summary-label">Booking Type:</span>
+          <span class="summary-value" id="summary-book-type">-</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Check-in:</span>
+          <span class="summary-value" id="summary-start-date">-</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Check-out:</span>
+          <span class="summary-value" id="summary-end-date">-</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Payment Method:</span>
+          <span class="summary-value" id="summary-payment-method">-</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Payment Type:</span>
+          <span class="summary-value" id="summary-payment-type">-</span>
+        </div>
+        <div class="summary-item summary-total">
+          <span>Total Price:</span>
+          <span id="summary-price">₱0</span>
+        </div>
+      </div>
+    
+    <div class="tours-section">
+      <div class="tour-card">
+        <div class="tour-content">
+          <div class="tour-image">
+            <div class="tour-slider">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 1" class="active">
+              <img src="{% static 'asset/image/slider2.jpg' %}" alt="Resort Image 2">
+              <img src="{% static 'asset/image/slider3.jpg' %}" alt="Resort Image 3">
+              <img src="{% static 'asset/image/slider4.jpg' %}" alt="Resort Image 4">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 5">
+            </div>
+          </div>
+          <div class="tour-details">
+            <div class="tour-title">
+              <h2>Day Tour</h2>
+              <span>(9AM-5PM)</span>
+            </div>
+            <div class="tour-description">
+              <p>Air Conditioned rooms, Television, Private pool, jacuzzi, venue, table, tables and chairs, videoke, parking space, kubo's with table, kalesa garden table set w/ umbrella, kitchen with sink, ihawan and stove.</p>
+            </div>
+            <div class="tour-price">
+              <span class="price-amount">₱7,500</span>
+              <span class="price-duration">Cost for 9 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tour-card">
+        <div class="tour-content">
+          <div class="tour-image">
+            <div class="tour-slider">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 1" class="active">
+              <img src="{% static 'asset/image/slider2.jpg' %}" alt="Resort Image 2">
+              <img src="{% static 'asset/image/slider3.jpg' %}" alt="Resort Image 3">
+              <img src="{% static 'asset/image/slider4.jpg' %}" alt="Resort Image 4">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 5">
+            </div>
+          </div>
+          <div class="tour-details">
+            <div class="tour-title">
+              <h2>Night Tour</h2>
+              <span>(8PM-6AM)</span>
+            </div>
+            <div class="tour-description">
+              <p>Air Conditioned rooms, Television, Private pool, jacuzzi, venue, table, tables and chairs, videoke, parking space, kubo's with table, kalesa garden table set w/ umbrella, kitchen with sink, ihawan and stove.</p>
+            </div>
+            <div class="tour-price">
+              <span class="price-amount">₱8,500</span>
+              <span class="price-duration">Cost for 10 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tour-card">
+        <div class="tour-content">
+          <div class="tour-image">
+            <div class="tour-slider">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 1" class="active">
+              <img src="{% static 'asset/image/slider2.jpg' %}" alt="Resort Image 2">
+              <img src="{% static 'asset/image/slider3.jpg' %}" alt="Resort Image 3">
+              <img src="{% static 'asset/image/slider4.jpg' %}" alt="Resort Image 4">
+              <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Image 5">
+            </div>
+          </div>
+          <div class="tour-details">
+            <div class="tour-title">
+              <h2>22 Hours</h2>
+            </div>
+            <div class="tour-description">
+              <p>Air Conditioned rooms, Television, Private pool, jacuzzi, venue, table, tables and chairs, videoke, parking space, kubo's with table, kalesa garden table set w/ umbrella, kitchen with sink, ihawan and stove.</p>
+            </div>
+            <div class="tour-price">
+              <span class="price-amount">₱15,500</span>
+              <span class="price-duration">Cost for 22 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  <script>
+    // Update booking summary in real-time
+    const bookType = document.getElementById("book_type");
+    const startDate = document.getElementById("start_date");
+    const endDate = document.getElementById("end_date");
+    const paymentMethod = document.getElementById("payment_method");
+    const paymentType = document.getElementById("payment_type");
+    
+    const summaryElements = {
+      bookType: document.getElementById("summary-book-type"),
+      startDate: document.getElementById("summary-start-date"),
+      endDate: document.getElementById("summary-end-date"),
+      paymentMethod: document.getElementById("summary-payment-method"),
+      paymentType: document.getElementById("summary-payment-type"),
+      price: document.getElementById("summary-price")
+    };
+    
+    const priceMap = {
+      "Day Tour": 7500,
+      "Night Tour": 8500,
+      "22 Hours": 15000,
+      "Full book": 'Custom price'
+    };
+    
+    function updateSummary() {
+      summaryElements.bookType.textContent = bookType.value || "-";
+      summaryElements.startDate.textContent = startDate.value || "-";
+      summaryElements.endDate.textContent = endDate.value || "-";
+      summaryElements.paymentMethod.textContent = paymentMethod.value || "-";
+      summaryElements.paymentType.textContent = paymentType.value || "-";
+      
+      const totalPrice = priceMap[bookType.value] || 0;
+      summaryElements.price.textContent = `₱${totalPrice.toLocaleString()}`;
+    }
+    
+    // Add event listeners
+    [bookType, startDate, endDate, paymentMethod, paymentType].forEach(element => {
+      element.addEventListener("change", updateSummary);
+    });
+    
+    // Initialize slider functionality
+    function setupSliders() {
+      const sliders = document.querySelectorAll('.tour-slider');
+      
+      sliders.forEach(slider => {
+        const images = slider.querySelectorAll('img');
+        let currentIndex = 0;
+        
+        // Show first image
+        images[currentIndex].classList.add('active');
+        
+        // Rotate images every 3 seconds
+        setInterval(() => {
+          images[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % images.length;
+          images[currentIndex].classList.add('active');
+        }, 3000);
+      });
+    }
+    
+    // Initialize date pickers with min date
+    function initDatePickers() {
+      const today = new Date().toISOString().split('T')[0];
+      startDate.min = today;
+      startDate.value = today;
+      
+      startDate.addEventListener('change', function() {
+        if (this.value) {
+          endDate.min = this.value;
+          if (endDate.value && endDate.value < this.value) {
+            endDate.value = this.value;
+          }
+        }
+      });
+    }
+    
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      setupSliders();
+      initDatePickers();
+      updateSummary();
+
+
+      const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek'
+            },
+            height: 650,
+            contentHeight: 600,
+            aspectRatio: 2,
+            events: "{% url 'event_data' %}",
+            eventDisplay: 'block',
+          
+            navLinks: true,
+            nowIndicator: true,
+            editable: false,
+            selectable: false,
+           
+            buttonText: {
+                today: 'Today',
+
+            }
+        });
+        calendar.render();
+    });
+
+
+
+  </script>
+{% endblock %}

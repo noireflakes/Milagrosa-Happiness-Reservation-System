@@ -1,0 +1,168 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+
+{% block title %} <title>Admin Panel</title> {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="{% static 'css/admin_panel.css' %}?v={{ timestamp }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Jomolhari&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<header class="header">
+  <nav class="navbar">
+      <div class="logo">
+          <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+      </div>
+
+      <ul class="nav-links">
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+          {% endif %}
+          <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+          <li><a href="{% url 'amenities' %}" class="nav-link">Amenities</a></li>
+          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+          <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+          <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+      </ul>
+  </nav>
+</header>
+<div class="container-fluid">
+  {% if user.is_superuser %}
+  <div class="admin-container">
+
+    
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <h4>Admin Panel</h4>
+      </div>
+      <nav class="admin-sidebar-nav">
+        <a href="{% url 'schedule' %}" class="admin-nav-link">
+      
+          <span>Schedule</span>
+        </a>
+        <a href="{% url 'approving' %}" class="admin-nav-link">
+
+          <span>Payments</span>
+        </a>
+        <a href="{% url 'refund' %}" class="admin-nav-link">   
+          <span>Refunds</span>
+        </a>
+        <a href="{% url 'user' %}" class="admin-nav-link">   
+          <span>User</span>
+        </a>
+        <a href="{% url 'admin_setting' %}" class="admin-nav-link">
+          <span>Setting</span>
+        </a>
+
+
+
+        <a href="{% url 'logout' %}" class="admin-nav-link logout-link">
+          
+          <span>Logout</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-main-content">
+      {% if schedule %}
+      <h2 class="mt-4">Approved Event</h2>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>User</th><th>Book Type</th><th>Start</th><th>End</th><th>Payment Method</th><th>Type</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for proof in proofs %}
+              {% if proof.payment_status == "approved" or proof.payment_status == "Approved" %}
+              <tr>
+                <td>{{ proof.book.user }}</td>
+                <td>{{ proof.book.book_type }}</td>
+                <td>{{ proof.book.start_date }}</td>
+                <td>{{ proof.book.end_date }}</td>
+                <td>{{ proof.book.payment_method }}</td>
+                <td>{{ proof.book.payment_type }}</td>
+                <td>{{ proof.book.event_status }}</td>
+                <td><a href="{% url 'delete_book' proof.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% elif payment %}
+      <h2 class="mt-4">Payment Approval Panel</h2>
+      <table class="table table-hover table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>User</th><th>Method</th><th>Type</th><th>Status</th><th>Proof</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for proof in proofs %}
+            {% if proof.book.refund_status == "not requested" or proof.payment_status == "pending"  %}
+            <tr>
+              <td>{{ proof.book.user }}</td>
+              <td>{{ proof.book.payment_method }}</td>
+              <td>{{ proof.book.payment_type }}</td>
+              <td>{{ proof.payment_status }}</td>
+              <td>
+                <a href="{{ proof.img.url }}" target="_blank" rel="">
+                  <img src="{{ proof.img.url }}" alt="proof" class="img-fluid" style="max-height: 150px;">
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'accept_payment' proof.id %}" class="btn btn-success btn-sm">Accept</a>
+                <a href="{% url 'cancel_payment' proof.id %}" class="btn btn-danger btn-sm">Cancel</a>
+              </td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% elif event_status %}
+      <h2 class="mt-4">Pending Refunds</h2>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr><th>User</th><th>Email</th><th>Start</th><th>End</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for proof in proofs %}
+            {% if proof.book.refund_status == "pending" or proof.book.refund_status == "Pending" %}
+            <tr>
+              <td>{{ proof.book.user }}</td>
+              <td><a href="mailto:{{ proof.book.user.email }}">{{ proof.book.user.email }}</a></td>
+              <td>{{ proof.book.start_date }}</td>
+              <td>{{ proof.book.end_date }}</td>
+              <td>{{ proof.book.event_status }}</td>
+              <td><a href="{% url 'refund_complete' proof.id %}" class="btn btn-primary btn-sm">Complete Refund</a></td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div> 
+
+  {% else %}
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'logout' %}" class="btn btn-outline-dark">Logout</a>
+  </div>
+ 
+  {% endif %}
+</div>
+
+
+{% endblock %}

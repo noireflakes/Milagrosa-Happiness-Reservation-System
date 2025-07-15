@@ -1,0 +1,117 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+
+{% block title %}<title>Profile Settings</title>{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="{% static 'css/admin_setting.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+<header class="header">
+  <nav class="navbar">
+      <div class="logo">
+          <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+      </div>
+      <ul class="nav-links">
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+          {% endif %}
+          <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+          <li><a href="{% url 'amenities' %}" class="nav-link">Amenities</a></li>
+          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+          <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+          <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+      </ul>
+
+  </nav>
+</header>
+
+
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <h4>Admin Panel</h4>
+        </div>
+        <nav class="admin-sidebar-nav">
+            <a href="{% url 'schedule' %}" class="admin-nav-link">
+                <span>Schedule</span>
+              </a>
+              <a href="{% url 'approving' %}" class="admin-nav-link">
+                <span>Payments</span>
+              </a>
+              <a href="{% url 'refund' %}" class="admin-nav-link">   
+                <span>Refunds</span>
+              </a>
+              <a href="{% url 'user' %}" class="admin-nav-link">   
+                <span>User</span>
+              </a>
+              <a href="{% url 'admin_setting' %}" class="admin-nav-link">
+                <span>Setting</span>
+              </a>
+              <a href="{% url 'logout' %}" class="admin-nav-link logout-link">
+                <span>Logout</span>
+              </a>
+        </nav>
+      </div>
+
+    <!-- Main Content -->
+    <div class="admin-main-content">
+ 
+      <section id="profile-info">
+        <h2 class="mt-4">Profile Information</h2>
+        <form method="post" action="{% url 'change_profile' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+          </div>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+      </section>
+
+      <!-- Change Password Section -->
+      <section id="password">
+        <h2>Change Password</h2>
+        <form method="post" action="{% url 'change_password' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" class="form-control" id="currentPassword" name="current_password" required>
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" class="form-control" id="newPassword" name="new_password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+        {% if error_messages %}
+            <div> {{ error_messages }} </div>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

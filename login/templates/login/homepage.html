@@ -1,0 +1,191 @@
+{% extends "login/layout.html" %}
+{% load static %}
+
+{% block title %}<title>Milagrosa Happiness Private Resort</title>{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{timestamp}}">
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}?v={{timestamp}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'calendar_library/index.global.min.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            
+            <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+            
+        </div>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+            {% endif %}
+            <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li><a href="{% url 'amenities' %}" class="nav-link">Amenities</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+            <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome 
+
+                {% if user.is_authenticated %}
+                    back {{ user.username }} to
+                {% endif %}
+
+
+            Milagrosa Happiness Private Resort</h1>
+            <p class="hero-description">
+                Located in Talisay Street, Peñabatan, Pulilan, Bulacan, our nature-friendly resort, founded by Romeo “OME” Santos on April 20, 2023, offers the perfect getaway for vacations, birthdays, Christmas parties, and special events. Enjoy stunning views and unforgettable experiences with every visit.</p>
+            <a href="{% url 'check_in' %}" class="cta-button">Book Your Stay Today</a>
+        </div>
+        
+        <div class="hero-slider">
+            <div class="slider-container">
+                <div class="slider">
+                    <img src="{% static 'asset/image/slider1.jpg' %}" alt="Resort Pool Area">
+                    <img src="{% static 'asset/image/slider2.jpg' %}" alt="Resort Accommodation">
+                    <img src="{% static 'asset/image/slider3.jpg' %}" alt="Resort Garden">
+                    <img src="{% static 'asset/image/slider4.jpg' %}" alt="Resort Facilities">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="calendar-section">
+        <h2 class="section-title">Check Resort Availability</h2>
+        <span class="booking-count">({{ monthly_bookings }} bookings this month)</span>
+        <div id="calendar"></div>
+    </section>
+    
+    <section class="gallery-section">
+        <h2 class="section-title">Discover What Our Resort Offers</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="{% static 'asset/image/image1.jpg' %}" alt="Resort View 1">
+                <div class="gallery-overlay">
+                    <p>Pool Area</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'asset/image/image2.jpg' %}" alt="Resort View 2">
+                <div class="gallery-overlay">
+                    <p>Cottages</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'asset/image/image3.jpg' %}" alt="Resort View 3">
+                <div class="gallery-overlay">
+                    <p>Event Space</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'asset/image/image4.jpg' %}" alt="Resort View 4">
+                <div class="gallery-overlay">
+                    <p>Garden</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="features-section">
+        <div class="feature-card">
+            <i class="fas fa-swimming-pool feature-icon"></i>
+            <h3>Luxury Pool </h3>
+            <p>Enjoy our pristine swimming pool with stunning views</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-utensils feature-icon"></i>
+            <h3>Gourmet Dining</h3>
+            <p>Experience our delicious local cuisine and dessert</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-spa feature-icon"></i>
+            <h3>Relaxation</h3>
+            <p>Unwind in our peaceful and serene environment</p>
+        </div>
+    </section>
+
+
+
+
+
+
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Penabatan, Pulilan, Bulacan</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@milagrosaresort.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'policies' %}">Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/MilagrosaHappinessResortt"><i class="fab fa-facebook"></i></a>
+   
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Milagrosa Happiness Private Resort. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,dayGridWeek'
+            },
+            height: 650,
+            contentHeight: 600,
+            aspectRatio: 2,
+            events: "{% url 'event_data' %}",
+            eventDisplay: 'block',
+          
+            navLinks: true,
+            nowIndicator: true,
+            editable: false,
+            selectable: false,
+           
+            buttonText: {
+                today: 'Today',
+
+            }
+        });
+        calendar.render();
+    });
+</script>
+
+{% endblock %}

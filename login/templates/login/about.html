@@ -1,0 +1,138 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+
+
+{% block title %} <title>About</title> {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{ timestamp }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Jomolhari&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{% static 'asset/image/logo.jpg' %}" alt="Milagrosa Resort Logo">
+        </div>
+
+        <ul class="nav-links">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li><a href="{% url 'amenities' %}" class="nav-link active">Amenities</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">About Us</a></li>
+            <li><a href="{% url 'check_in' %}" class="book-btn">Book Now</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero-about">
+    <img src="{% static 'asset/image/image1.jpg' %}" alt="Milagrosa Resort">
+    <h1>About Us</h1>
+</section>
+
+<section class="about-content">
+    <h1 class="about-title">Milagrosa Happiness Private Resort</h1>
+    <p class="about-text">
+        The Milagrosa Happiness Private Resort is a nature-friendly and beautiful resort located in
+        Talisay Street, Peñabatan Pulilan, Bulacan. Romeo "OME" Santos, the owner, started the
+        operation of the Milagrosa Happiness Private Resort on April 20, 2023. This resort is
+        suitable for vacations, birthdays, Christmas parties, and other events. Milagrosa Happiness 
+        Private Resort was built to start a business and to provide a beautiful view and unforgettable 
+        joyful experience to the guests who will visit here.
+    </p>
+    
+    <div class="divider"></div>
+</section>
+
+<section class="mission-vision">
+    <div class="mission">
+        <h1>Our Mission</h1>
+        <p>To delight every guest to be relaxed and happy during their stay, offering friendly service with unforgettable experiences that create lasting memories of joy and comfort.</p>
+    </div>
+
+    <div class="vision">
+        <h1>Our Vision</h1>
+        <p>To be recognized as the premier destination and most accommodating private resort in Pulilan, Bulacan, known for exceptional service, beautiful surroundings, and unforgettable guest experiences.</p>
+    </div>
+</section>
+
+<section class="values">
+    <h2>Our Core Values</h2>
+    <div class="values-grid">
+        <div class="value-card">
+            <div class="value-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h3>Hospitality</h3>
+            <p>We treat every guest like family, providing warm, personalized service that exceeds expectations.</p>
+        </div>
+        
+        <div class="value-card">
+            <div class="value-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Sustainability</h3>
+            <p>We maintain an eco-friendly resort that harmonizes with nature while providing modern comforts.</p>
+        </div>
+        
+        <div class="value-card">
+            <div class="value-icon">
+                <i class="fas fa-laugh-beam"></i>
+            </div>
+            <h3>Joy</h3>
+            <p>We create an atmosphere of happiness where guests can relax, celebrate, and make memories.</p>
+        </div>
+        
+        <div class="value-card">
+            <div class="value-icon">
+                <i class="fas fa-medal"></i>
+            </div>
+            <h3>Excellence</h3>
+            <p>We continuously improve our facilities and services to maintain the highest standards.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Peñabatan, Pulilan, Bulacan</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@milagrosaresort.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'policies' %}">Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/MilagrosaHappinessResortt"><i class="fab fa-facebook"></i></a>
+   
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Milagrosa Happiness Private Resort. All Rights Reserved.</p>
+    </div>
+</footer>
+
+{% endblock %}

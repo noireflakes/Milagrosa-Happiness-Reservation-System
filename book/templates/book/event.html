@@ -1,0 +1,72 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+{% block title %}<title>Check in</title>{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'static/book.html' %}">{% endblock %}
+{% block js %}{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <h1>Approved Event</h1>
+        <table>
+            <table>
+                <tr>
+                    <th>user</th>
+                    <th>book_type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Payment Method</th>
+                    <th>Payment Type</th>
+                </tr>
+                {% for proof in proofs %}
+                    {% if proof.payment_status == "Approved" %}
+                        <tr>
+                            <td> {{ proof.book.user }} </td>
+                            <td> {{ proof.book.book_type }} </td>
+                            <td> {{ proof.book.start_date }} </td>
+                            <td> {{ proof.book.end_date }} </td>
+                            <td> {{ proof.book.payment_method }} </td>
+                            <td> {{ proof.book.payment_type }} </td>
+            
+                        </tr>
+                        
+                    {% endif %}
+                {% endfor %}
+        </table>
+
+        <h1>Payment approval panel</h1>
+        <table>
+
+            <tr>
+                <th>User</th>
+                <th>Payment Method</th>
+                <th>Payment Type</th>
+                <th>Payment Status</th>
+                <th>Proof</th>
+                <th>Aproved or not</th>
+            </tr>
+            {% for proof in proofs %}
+
+                {% if proof.payment_status == "pending" %}
+                    <tr>
+                        <td> {{proof.book.user}} </td>
+                        <td> {{ proof.book.payment_method }} </td>
+                        <td> {{ proof.book.payment_type }} </td>
+                        <td> {{ proof.payment_status }} </td>
+                        <td><img src="{{ proof.img.url }}" alt="works" style="height: 200px; width: auto;" ></td>
+                        <td> <a href="{% url 'accept_payment' proof.id %}">Accept</a>
+                             <a href="{% url 'cancel_payment' proof.id%}">Cancel</a> </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <div>
+            <a>Dash Board</a>
+            <a>Shecdule</a>
+
+            <a href="{% url 'logout' %}">Log-out</a>
+            <a href="{% url 'index' %}">home</a>
+
+        </div>
+    </div>
+{% endblock %}

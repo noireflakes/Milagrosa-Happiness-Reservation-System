@@ -1,0 +1,43 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+
+{% block title %}
+  <title>GCash Payment</title>
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/gcash.css' %}?v={{ timestamp }}">
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block body %}
+
+<div class="gcash-container">
+  <h1>Order Summary</h1>
+  <h3>Please Scan the QR Code to Pay</h3>
+
+  <img src="{% static 'asset/qr.jpg' %}" alt="GCash QR Code">
+
+  <div class="gcash-info">
+    <div><strong>Pay to:</strong> Romeo Santos</div>
+    <div><strong>GCash Number:</strong> 0973 874 298</div>
+    <div></div> <strong>Total Amount:</strong>₱ {{ amount }}</div>
+  </div>
+
+  <fieldset>
+    <legend><strong>Upload Proof of Payment</strong></legend>
+    <form action="{% url 'payment_proof' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="img" class="custom-file-upload">Choose File</label>
+      <input id="img" name="img" type="file" accept="image/*" required>
+      <input type="submit" value="Submit">
+    </form>
+    
+  </fieldset>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'login/layout.html' %}
+{% load static %}
+{% block title  %} <title>Policies - Milagrosa Happiness Private Resort</title> {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/policies.css' %}?v={{ timestamp }}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}?v={{ timestamp }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jomolhari&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+<div class="content-container">
+  <h1>Milagrosa Happiness Private Resort</h1>
+  
+  <h2>Booking Policy</h2>
+  <ul>
+    <li>We require ₱1,000 down payment to book your desired date</li>
+    <li>Down payment is non-refundable</li>
+    <li>Balance must be settled upon arrival</li>
+  </ul>
+  <p class="note">Note: Your booking is only confirmed once we receive your down payment.</p>
+
+  <hr>
+
+  <h2>Pool Rules and Regulations</h2>
+  <ul>
+    <li>Please shower before entering the pool</li>
+    <li>Strictly no food, drinks, or gum in the pool area</li>
+    <li>No jumping, running, or diving to prevent accidents</li>
+    <li>Children must be accompanied by adults at all times</li>
+    <li>Persons with infections are not permitted in the pool</li>
+    <li>No urinating, spitting, or blowing nose in the pool</li>
+    <li>Smoking is prohibited in the pool area</li>
+    <li>No pets allowed in the pool area</li>
+    <li>No littering - please dispose of garbage properly</li>
+    <li>No lifeguard on duty - swim at your own risk</li>
+  </ul>
+  <p class="note">For your safety and enjoyment, please follow all pool rules.</p>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Penabatan, Pulilan, Bulacan</p>
+            <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+            <p><i class="fas fa-envelope"></i> info@milagrosaresort.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2023 Milagrosa Happiness Private Resort. All Rights Reserved.</p>
+    </div>
+</footer>
+{% endblock %}
